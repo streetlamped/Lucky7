@@ -1,11 +1,18 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Random random = new Random();
-        int money = 5;
+        Scanner scanner = new Scanner(System.in);
 
-        while (money > 0) {
+        System.out.println("How much money do you want to start with?");
+        int money = scanner.nextInt();
+        scanner.nextLine();
+
+        String answer = "";
+
+        while (money > 0 && !answer.equals("e")) {
             money = money - 1;
 
             int number1 = random.nextInt(10) + 1;
@@ -42,7 +49,19 @@ public class App {
                 System.out.println("You lost!");
             }
 
-            System.out.println("Money: " + money + " euros");
+            System.out.println("Money: " + money + "€");
+
+            if (money > 0) {
+                System.out.println("Haluatko pelata uudestaan? Jos haluat pelata, paina Enter. Jos et halua pelata, kirjoita e ja paina Enter.");
+                answer = scanner.nextLine();
+            }
         }
+
+        if (money <= 0) {
+            System.out.println("You ran out of money!");
+        }
+
+        System.out.println("Game over!");
+        scanner.close();
     }
 }
